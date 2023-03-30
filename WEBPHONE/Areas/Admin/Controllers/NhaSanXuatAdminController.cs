@@ -13,7 +13,7 @@ namespace WEBPHONE.Areas.Admin.Controllers
         // GET: Admin/NhaSanXuatAdmin
         public ActionResult Index()
         {
-            var ds = NhaSanXuatBUS.DanhSach();
+            var ds = NhaSanXuatBUS.DanhSachAdmin();
             return View(ds);
         }
 
@@ -46,9 +46,9 @@ namespace WEBPHONE.Areas.Admin.Controllers
         }
 
         // GET: Admin/NhaSanXuatAdmin/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(String id)
         {
-            return View();
+            return View(NhaSanXuatBUS.ChiTietAdmin(id));
         }
 
         // POST: Admin/NhaSanXuatAdmin/Edit/5
@@ -68,6 +68,30 @@ namespace WEBPHONE.Areas.Admin.Controllers
         }
 
         // GET: Admin/NhaSanXuatAdmin/Delete/5
+       
+
+        // POST: Admin/NhaSanXuatAdmin/Delete/5
+        [HttpPost]
+        public ActionResult XoaTamThoi(String id)
+        {
+            return View(NhaSanXuatBUS.ChiTietAdmin(id));
+        }
+        [HttpPost]
+        public ActionResult XoaTamThoi(String id ,NhaSanXuat nsx)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+                nsx.TinhTrang = "1";
+                NhaSanXuatBUS.UpdateNSX(id, nsx);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        // GET: Admin/NhaSanXuatAdmin/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
@@ -80,7 +104,7 @@ namespace WEBPHONE.Areas.Admin.Controllers
             try
             {
                 // TODO: Add delete logic here
-
+               
                 return RedirectToAction("Index");
             }
             catch

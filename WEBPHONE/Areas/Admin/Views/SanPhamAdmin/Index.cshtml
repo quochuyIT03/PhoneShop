@@ -1,8 +1,58 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_MainLayoutAdmin.cshtml";
-}
+﻿@model PagedList.IPagedList<ShopConnection.SanPham>
+@using PagedList.Mvc;
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Areas/Admin/Views/Shared/_MainLayoutAdmin.cshtml";
+    }
 
-<h2>Index cua trang san pham</h2>
+    <h2>Index cua trang san pham</h2>
 
+    <style>
+        th, td {
+            text-align: center;
+        }
+    </style>
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">Quản lý San pham</h1>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">DataTables</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Mã San pham</th>
+                                <th>Tên Sản Pham</th>
+                                <th>Tình Trạng</th>
+                                <th colspan="2">
+                                    <a href="@Url.Action("Create", "SanPhamAdmin")"><img src="~/assets/images/AddNSX.png" /></a>
+                                </th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.MaSP</td>
+                                <td>@item.TenSp</td>
+
+                                <td>@Html.Partial("_AvartaImg", WEBPHONE.Models.BUSS.ShopOnlineBUSS.LoadAvartaImg(@item.MaSP))</td>
+
+                                <td>@item.TinhTrang</td>
+
+                                <th><a href="#" data-id="@item.MaSP" class="btn-images"><img src="~/Asset/images/ThemHinh.png" style="background:white;" /></a></th>
+                                <th><a href="@Url.Action("Edit","SanPhamAdmin",new {id = item.MaSP})"><img src="~/assets/images/edit.png" /></a></th>
+                                <th><a href="@Url.Action("Xoa tam thoi","SanPhamAdmin",new {id = item.MaSP})"><img src="~/assets/images/edit.png" /></a></th>
+                                <th><a><img src="~/assets/images/Delete.png" /></a></th>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>

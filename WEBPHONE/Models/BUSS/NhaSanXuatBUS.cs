@@ -8,21 +8,39 @@ namespace WEBPHONE.Models.BUSS
 {
     public class NhaSanXuatBUS
     {
+        //----------Customer------------------
         public static IEnumerable<NhaSanXuat> DanhSach()
         {
             var db = new ShopConnectionDB();
-            return db.Query<NhaSanXuat>("Select * from NhaSanXuat");
+            return db.Query<NhaSanXuat>("Select * from NhaSanXuat where TinhTrang = 0");
         }
+        
         public static IEnumerable<SanPham> ChiTiet(String id)
         {
             var db = new ShopConnectionDB();
             return db.Query<SanPham>("Select * from SanPham where NhaSX = '"+id+"'");
         }
-
+        //--------------------------admin-----------------------
         public static void ThemNSX(NhaSanXuat nsx)
         {
             var db = new ShopConnectionDB();
             db.Insert(nsx);
+        }
+        public static IEnumerable<NhaSanXuat> DanhSachAdmin()
+        {
+            var db = new ShopConnectionDB();
+            return db.Query<NhaSanXuat>("select * from NhaSanXuat");
+        }
+        public static NhaSanXuat ChiTietAdmin(String id)
+        {
+            var db = new ShopConnectionDB();
+            return db.SingleOrDefault<NhaSanXuat>("select * from NhaSanXuat where MaNhaSanXuat = '" + id + "'");
+
+        }
+        public static void UpdateNSX (String id, NhaSanXuat nsx)
+        {
+            var db = new ShopConnectionDB();
+            db.Update(nsx, id);
         }
     }
 }

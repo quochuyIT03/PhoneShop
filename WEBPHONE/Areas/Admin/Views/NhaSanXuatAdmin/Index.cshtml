@@ -35,18 +35,19 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@item.MaNSX</td>
+                            <td>@item.MaNSX</td>    
                             <td>@item.TenNSX</td>
                             <td>@item.TinhTrang</td> 
-                            <th><img src="~/assets/images/edit.png" /></th>
-                            <th><img src="~/assets/images/Delete.png" /></th>
+                            <th><a href="@Url.Action("Edit","NhaSanXuatAdmin",new {id = item.MaNSX})"><img src="~/assets/images/edit.png" /></a></th>
+                            <th><a href="@Url.Action("Xoa tam thoi","NhaSanXuatAdmin",new {id = item.MaNSX})"><img src="~/assets/images/edit.png" /></a></th>                 
+                            <th><a><img src="~/assets/images/Delete.png" /></a></th>
                         </tr>
                     }      
                 </table>
             </div>
         </div>
     </div>
-</div>
+</div
 <!-- /.container-fluid -->
 
 
